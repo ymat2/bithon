@@ -18,6 +18,7 @@ def command_prank(args):
   from bithon.codon_alignment import codon_alignment
   params = {
     'nuc': args.infile,
+    'out': args.outfile,
     'prank_exe': args.prank_exe
   }
   codon_alignment(params)
@@ -56,6 +57,7 @@ def main():
   # codon_alignment
   parser_prank = subparsers.add_parser("prank")
   parser_prank.add_argument("-i", "--infile")
+  parser_prank.add_argument("-o", "--outfile")
   parser_prank.add_argument("--prank_exe", default="prank")
   parser_prank.set_defaults(handler=command_prank)
 

@@ -6,7 +6,7 @@ Personal pyhton package for bioinformatics.
 ## Installation
 
 ```sh
-pyhton3 -m pip install git+https://github.com/ymat2/bithon
+python3 -m pip install git+https://github.com/ymat2/bithon
 ```
 
 
@@ -24,8 +24,9 @@ bithon gls -i indir -o outdir
 ### prank alignment
 
 ```sh
-bithon prank -i file_path --prank_exe prank_path
+bithon prank -i file_path -o file_name --prank_exe prank_path
 ```
 
 - `-i` / `--infile`: Fasta file to align
+- `-o` / `--outfile`: Path and file name. *file_name*.best.fas are genarated.
 - `--prank_exe`: Path for `prank` executable file. Defaut is `prank`.

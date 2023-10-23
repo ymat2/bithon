@@ -5,24 +5,24 @@ from bithon import fs
 def codon_alignment(params):
 
   _in = params['nuc']
+  _out = params['out']
   _prank = params['prank_exe']
-  file_name = '.'.join(_in.split('.')[:-2])
 
   fas = fs.fasta2dict(_in)
   fas = as_multiple3(fas)
-  fs.write_fasta(fas, file_name+'.m3.fa')
+  fs.write_fasta(fas, _out+'.m3.fa')
 
   print("\tSatrt prank alignment.")
   subprocess.run(
     _prank
-    +' -d='+file_name+'.m3.fa'
-    +' -o='+file_name
+    +' -d='+_out+'.m3.fa'
+    +' -o='+_out
     +' -codon -quiet',
     shell=True
   )
   print("\tFinish prank alignment.")
 
-  os.remove(file_name+'.m3.fa')
+  os.remove(_out+'.m3.fa')
 
 
 def as_multiple3(seq_dict):

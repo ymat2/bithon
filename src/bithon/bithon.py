@@ -8,8 +8,21 @@ def command_gls(args):
   from bithon.get_longest_seq import get_longest_seq
   params = get_params(args)
   get_longest_seq(params)
-  print("Time elapsed: {:,} seq.".format(int(time.time() - start)))
+  print("Time elapsed: {:,} sec.".format(int(time.time() - start)))
   print("bithon::get_longest_seq ends.")
+
+
+def command_prank(args):
+  print("bithon::codon_alignment starts.")
+  start = time.time()
+  from bithon.codon_alignment import codon_alignment
+  params = {
+    'nuc': args.infile,
+    'prank_exe': args.prank_exe
+  }
+  codon_alignment(params)
+  print("Time elapsed: {:,} sec.".format(int(time.time() - start)))
+  print("bithon::codon_alignment ends.")
 
 
 def get_params(args):
@@ -39,6 +52,12 @@ def main():
   parser_gls.add_argument("-i", "--indir")
   parser_gls.add_argument("-o", "--outdir")
   parser_gls.set_defaults(handler=command_gls)
+
+  # codon_alignment
+  parser_prank = subparsers.add_parser("prank")
+  parser_prank.add_argument("-i", "--infile")
+  parser_prank.add_argument("--prank_exe", default="prank")
+  parser_prank.set_defaults(handler=command_prank)
 
   args = parser.parse_args()
   if hasattr(args, "handler"):

@@ -2,14 +2,23 @@ import argparse
 import time
 import os
 
-def command_gls(args):
-  print("bithon::get_longest_seq starts.")
+def command_ngls(args):
+  print("bithon::ncbi_gls starts.")
   start = time.time()
-  from bithon.get_longest_seq import get_longest_seq
+  from bithon.ncbi_gls import ncbi_gls
   params = get_params(args)
-  get_longest_seq(params)
+  ncbi_gls(params)
   print("Time elapsed: {:,} sec.".format(int(time.time() - start)))
-  print("bithon::get_longest_seq ends.")
+  print("bithon::ncbi_gls ends.")
+
+
+def command_egls(args):
+  print("bithon::ensembl_gls starts.")
+  start = time.time()
+  from bithon.ensembl_gls import ensembl_gls
+  ensembl_gls(args.infile, args.outfile, args.header)
+  print("Time elapsed: {:,} sec.".format(int(time.time() - start)))
+  print("bithon::ensembl_gls ends.")
 
 
 def command_prank(args):
@@ -48,11 +57,18 @@ def main():
   parser = argparse.ArgumentParser()
   subparsers = parser.add_subparsers()
 
-  # get_longest_seq
-  parser_gls = subparsers.add_parser("gls")
+  # ncbi_gls
+  parser_gls = subparsers.add_parser("ngls")
   parser_gls.add_argument("-i", "--indir")
   parser_gls.add_argument("-o", "--outdir")
-  parser_gls.set_defaults(handler=command_gls)
+  parser_gls.set_defaults(handler=command_ngls)
+
+  # ensembl_gls
+  parser_egls = subparsers.add_parser("egls")
+  parser_egls.add_argument("-i", "--infile")
+  parser_egls.add_argument("-o", "--outfile")
+  parser_egls.add_argument("--header", choices=["transcript", "id", "symbol"])
+  parser_egls.set_defaults(handler=command_egls)
 
   # codon_alignment
   parser_prank = subparsers.add_parser("prank")

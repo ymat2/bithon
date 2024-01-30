@@ -1,6 +1,6 @@
 from bithon import fs, parsegtf
 
-def get_longest_seq(params):
+def ncbi_gls(params):
   if params['gtf']:
     gtf = params['gtf']
     prot2gene = parsegtf.prot2gene(gtf)

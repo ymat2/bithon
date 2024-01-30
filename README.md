@@ -12,14 +12,24 @@ python3 -m pip install git+https://github.com/ymat2/bithon
 
 ## Basic usage
 
-### get longest seq
+### get longest seq from NCBI
 
 ```sh
-bithon gls -i indir -o outdir
+bithon ngls -i indir -o outdir
 ```
 
 - `-i` / `--indir`: Directory contains cds, pep, and gtf
 - `-o` / `--outdir`: *outdir*.pep.fa and *outdir*.cds.fa are generated
+
+### get longest seq from ENSEMBL
+
+```sh
+bithon egls -i infile -o outfile --header str
+```
+
+- `-i` / `--infile`: input fasta file name
+- `-o` / `--outfile`: output fasta file name
+- `--header`: one of "transcript", "id", or "symbol". Chosen one is written as header of fasta.
 
 ### prank alignment
 

@@ -4,13 +4,16 @@ build-backend = "flit_core.buildapi"
 
 [project]
 name = "bithon"
-version = "0.0.3"
+version = "0.1.0"
 authors = [
   { name="ymat2", email="yuki.matsuda.r7@dc.tohoku.ac.jp" },
 ]
 description = "Personal python package for bioinformatics"
 readme = "README.md"
 requires-python = ">=3.7"
+dependencies = [
+  "biopython"
+]
 
 [project.urls]
 "Homepage" = "https://ymat2.github.io"

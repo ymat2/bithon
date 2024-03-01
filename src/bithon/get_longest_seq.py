@@ -55,6 +55,9 @@ def parse_fna(d: dict) -> dict:
     desc = {i.split("=")[0]: i.split("=")[1] for i in desc if "=" in i}
     prot_id = desc.get("protein_id", "NA")
     gene_id = desc.get("gene", "NA")
+    locus_tag = desc.get("locus_tag", "NA")
+    if gene_id == "NA":
+      gene_id = "locus_" + locus_tag
     ids[prot_id] = [cds_id, gene_id, v]
   return ids
 
